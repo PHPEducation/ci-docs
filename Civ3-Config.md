@@ -35,7 +35,7 @@ cache:
     file: composer.lock
   nodejs:
     folder: node_modules
-    file: yarn.lock
+    file: package-lock.json
 ```
 
 - Tiếp đến trong folder root tạo tiếp file có tên `.env.civ3.example` có nội dung như sau:
