@@ -17,10 +17,12 @@ build:
     prepare:
       - cp .env.civ3.example .env
       - composer install
-      - yarn install
+      - yarn install # L
       - framgia-ci test-connect mysql_test 3306 60
       - php artisan migrate --database=mysql_test
 test:
+  # Nếu proejct đang sử dụng eslint và có file eslintrc.json thì dùng khối eslint ở dưới
+  # Trong trường hợp không sử dụng eslint có thể loại bỏ khối eslint dưới đây
   eslint:
     ignore: false
     command: eslint --format=checkstyle
@@ -33,6 +35,10 @@ cache:
   composer:
     folder: vendor
     file: composer.lock
+# Nếu project đã và đang sử dụng npm hoặc yarn và tháy có xuất hiện file
+# package-lock.json hoặc yarn.lock thì mới sử dụng đoạn dưới đây
+# trong trường hợp chưa sử dụng tới hãy loại bỏ đoạn dưới đi
+# nếu sử dụng yarn thì sửa lại là "file: yarn.lock" còn dùng npm thì giữ nguyên
   nodejs:
     folder: node_modules
     file: package-lock.json
