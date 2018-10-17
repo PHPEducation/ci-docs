@@ -3,6 +3,7 @@
 - Trong folder root của project tạo file có tên `framgia-ci.yml` với nội dung như sau:
 ```
 project_type: php
+url: https://civ3-dev.framgia.vn
 build:
   general_test:
     image: framgiaciteam/laravel-workspace:latest
@@ -21,27 +22,19 @@ build:
       - framgia-ci test-connect mysql_test 3306 60
       - php artisan migrate --database=mysql_test
 test:
-  # Nếu proejct đang sử dụng eslint và có file eslintrc.json thì dùng khối eslint ở dưới
-  # Trong trường hợp không sử dụng eslint có thể loại bỏ khối eslint dưới đây
-  eslint:
-    ignore: false
-    command: eslint --format=checkstyle
-      --output-file=.framgia-ci-reports/eslint.xml
-      resources/assets/js/ --ext .js
   phpcs:
     ignore: false
     command: echo '' | phpcs --standard=Framgia --report-checkstyle=.framgia-ci-reports/phpcs.xml app
+  phpunit:
+    ignore: false
+    command:
+      - php -dzend_extension=xdebug.so vendor/bin/phpunit
+        --coverage-clover=.framgia-ci-reports/coverage-clover.xml
+        --coverage-html=.framgia-ci-reports/coverage
 cache:
   composer:
     folder: vendor
     file: composer.lock
-# Nếu project đã và đang sử dụng npm hoặc yarn và tháy có xuất hiện file
-# package-lock.json hoặc yarn.lock thì mới sử dụng đoạn dưới đây
-# trong trường hợp chưa sử dụng tới hãy loại bỏ đoạn dưới đi
-# nếu sử dụng yarn thì sửa lại là "file: yarn.lock" còn dùng npm thì giữ nguyên
-  nodejs:
-    folder: node_modules
-    file: package-lock.json
 ```
 
 - Tiếp đến trong folder root tạo tiếp file có tên `.env.civ3.example` có nội dung như sau:
