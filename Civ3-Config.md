@@ -3,7 +3,7 @@
 - Trong folder root của project tạo file có tên `framgia-ci.yml` với nội dung như sau:
 ```
 project_type: php
-url: https://civ3-dev.framgia.vn
+url: https://civ3-dev.s.vn
 build:
   general_test:
     image: framgiaciteam/laravel-workspace:latest
