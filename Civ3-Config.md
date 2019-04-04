@@ -1,9 +1,9 @@
 ## Hướng dẫn sử dụng CI-v3 cho project Ede
 **1) Config Civ3 cho**
-- Trong folder root của project tạo file có tên `framgia-ci.yml` với nội dung như sau:
+- Trong folder root của project tạo file có tên `framgia-ci.yml` với nội dung như sau: 
 ```
 project_type: php
-url: https://civ3-dev.s.vn
+url: https://civ3-dev.sun-asterisk.vn
 build:
   general_test:
     image: framgiaciteam/laravel-workspace:latest
@@ -37,7 +37,7 @@ cache:
     file: composer.lock
 ```
 
-- Tiếp đến trong folder root tạo tiếp file có tên `.env.civ3.example` có nội dung như sau:
+- Tiếp đến trong folder root tạo tiếp file có tên `.env.civ3.example` có nội dung như dưới :
 ```
 APP_NAME=Laravel
 APP_ENV=testing
